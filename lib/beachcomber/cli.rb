@@ -2,7 +2,7 @@
 
 class Beachcomber::CLI
 
-  attr_accessor :country, :state_territory, :beach
+  attr_accessor :country, :state_territory, :beach, :index_url, :region_url
 
 
   def  call
@@ -18,16 +18,24 @@ def get_country_input
   while input != "exit"
     input = gets.strip.to_i
       if input == 1
-            self.country= ("United States")
-            self.list_US_states
-            # put code in here to instatiate scraper and call scrape index page
+        country="United States"
+        # Scraper.select_index_url("United States")
+        # Scraper.scrape_index_page(index_url)
+        # self.country= ("United States")
+        # self.list_US_states
+        # put code in here to instatiate scraper and call scrape index page
       elsif input == 2
-          self.country= ("United Kingdom")
-           self.list_UK_territories
+        country="United Kingdom"
+        # Scraper.select_index_url("United States")
+        # Scraper.scrape_index_page(index_url)
+          # self.country= ("United Kingdom")
+          #  self.list_UK_territories
       else
         puts "Please enter a valid number (1 or 2)."
         self.call # if invalid input is entered, start over again : )
       end
+      Scraper.select_index_url("#{country}")
+      Scraper.scrape_index_page
     end
  end
 
@@ -68,6 +76,7 @@ def get_region_input(country)
     region_index = input -1
      puts region_array[region_index]
   end
+
 
 
 end #end of class

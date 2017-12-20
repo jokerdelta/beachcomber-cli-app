@@ -1,11 +1,12 @@
-class InvalidType = StandardError; end
+class InvalidType < StandardError; end
 
 class Country
 
-    attr_accessor :name, :url
+    attr_accessor :name, :index_url
 
 
-    def initialize
+    def initialize(name)
+      @name = name
       @state_territories = [ ] #empty array to hold state_territory objects "has many" relationship
     end
 
@@ -18,7 +19,7 @@ class Country
             raise InvalidType, "must be a State_territory object" # custom error message
         else
         @state_territories  << state_territory # push object onto array
-      end
+        end
     end
 
 end

@@ -52,4 +52,10 @@ We need to scrape the beach locations for that state and add them to that instan
 
 URL’s
 https://tidesandcurrents.noaa.gov/tide_predictions.html
+
 http://www.ntslf.org/tides/predictions
+port = doc.css(".row p strong")
+port.each do |port|
+
+puts port[0]
+port 0,24
