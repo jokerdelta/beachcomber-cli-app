@@ -1,6 +1,2 @@
-require_relative  "./beachcomber/version"
-require_relative "./beachcomber/cli"
-require_relative "./beachcomber/country"
-require_relative "./beachcomber/scraper"
-require_relative "./beachcomber/state_territory"
-require_relative"./beachcomber/beach"
+
+require_relative'../config/environment'

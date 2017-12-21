@@ -1,6 +1,6 @@
 class InvalidType < StandardError; end
 
-class Country
+class Region
 
     attr_accessor :name, :index_url
 

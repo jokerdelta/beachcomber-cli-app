@@ -1,27 +1,24 @@
-require 'rubygems'
-require 'nokogiri'
-require 'open-uri'
-require 'pry'
+require'pry'
+require'nokogiri'
+require'open-uri'
 
-class Scraper
 
-  attr_accessor :index_url
+class Beachcomber::Scraper
 
-    @@index_url = ""
-    # def initialize(country)
-    #   @country = country
-    # end
+  attr_accessor :index_url, :region
 
-    def self.scrape_index_page
+    @@index_url = "http://www.tides.net/"
+
+
+    def self.create_regions_from_Index_page
       doc = Nokogiri::HTML(open(@@index_url))
-      scraped_regions = [ ] #set up empty array to hold each region hash
-      binding.pry
+      doc.css("p strong").each do |region_name|
+      name = region_name.to_str
+      region = Region.new(name)
+      Beachcomber::CLI.add_region(region)
+    end
       #iterate through the regions
-      doc.css(".nav-header li").each do |region| #iterate through each region link
-      # scraped_regions << { :name => doc.css("h4.student-name").text, # add region hash to scraped_regions array
-          # }
-      # end
-    # scraped_regions # return scraped regions array
+
   end # end of method
 
   def self.scrape_region_page(region_url) #state or territory page
@@ -39,13 +36,5 @@ class Scraper
             # scraped_region
 
       end # end of method
-
-      def self.select_index_url(country)
-          if country == "United States"
-            @@index_url = "https://tidesandcurrents.noaa.gov/tide_predictions.html"
-          elsif country == "United Kingdom"
-            @@index_url = "http://www.ntslf.org/tides/predictions"
-          end
-      end
 
 end # end of class
