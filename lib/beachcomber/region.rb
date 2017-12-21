@@ -21,5 +21,12 @@ class Region
         @state_territories  << state_territory # push object onto array
         end
     end
-
+    
+    def self.create_from_webpage
+       Beachcomber::Scraper.scrape_regions.each do |region_name|
+        name = region_name.to_str
+       region = self.new(name)
+       Beachcomber::CLI.add_region(region)
+    end
+  end
 end

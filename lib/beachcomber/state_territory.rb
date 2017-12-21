@@ -1,8 +1,9 @@
 class State_territory
 
-  attr_accessor :name, :country, :url
+  attr_accessor :name, :region, :url
 
-  def initialize
+  def initialize(name)
+    @name = name
     @beaches = [ ] #empty array to hold 'beach' objects (has many relationship)
   end
 
@@ -16,6 +17,14 @@ class State_territory
       else
         @beaches  << beach# push object onto array
       end
+  end
+
+  def self.create_from_webpage
+     Beachcomber::Scraper.scrape_state_territory.each do |state_name|
+      name = state_name.text
+     state = self.new(name)
+     Beachcomber::Region.add_state_territory(state)
+    end
   end
 
 end

@@ -25,7 +25,8 @@ def get_region_input
     end
 
   def list_regions
-    Beachcomber::Scraper.create_regions_from_Index_page
+    Beachcomber::Scraper.scrape_regions
+    Region::create_from_webpage
     @@regions.each_with_index do |region, index|
       number = index + 1
       name = region.name
@@ -33,16 +34,7 @@ def get_region_input
     end
     end # end of method
 
-# def print_states(region_array)
-#   3.times do |n|
-#       print "\n" # print 5 blank lines
-#   end
-#   # puts "Low-tide forcasts are available for the following states: "
-#     region_array.each_with_index do |region, index|
-#     number = index + 1
-#     printf (" %5d. %-20s \n "  %[number, region]) #number 5s, left / loc 20s, right
-#   end #end of block
-# end
+
 
 def self.add_region(region)
     if !region.is_a?(Region) #if not Region object
