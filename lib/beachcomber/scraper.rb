@@ -15,7 +15,7 @@ class Beachcomber::Scraper
       doc.css("p strong")
     end # end of method
 
-  def self.scrape_state_territory
+  def self.scrape_states
     doc = Nokogiri::HTML(open(@@index_url))
     doc.css("p a")
   end # end of method

@@ -7,18 +7,20 @@ class Beachcomber::CLI
   @@regions = [ ]
 
   def  call
-        get_region_input
+        # get_region_input
         # get_state_input
+        self.list_regions
+        self.list_states
   end
 
 def get_region_input
   puts "Welcome fellow beachcomber!  Which region would you like to beachcomb today?"
   self.list_regions
-
+  self.list_states
   input = nil
     while input != "exit"
         input = gets.strip.to_i - 1
-        self.list_US_states[input]
+        self.list_regions[number]
     end
 
 
@@ -26,13 +28,23 @@ def get_region_input
 
   def list_regions
     Beachcomber::Scraper.scrape_regions
-    Region::create_from_webpage
+    Region.create_from_webpage
     @@regions.each_with_index do |region, index|
       number = index + 1
       name = region.name
       puts "#{number}.  #{name}"
-    end
+      end
     end # end of method
+
+    def list_states
+      Beachcomber::Scraper.scrape_states
+      State.create_from_webpage
+      # Region.states.each_with_index do |state, index|
+      #   number = index + 1
+      #   name = region.name
+      #   puts "#{number}.  #{name}"
+        # end
+    end
 
 
 

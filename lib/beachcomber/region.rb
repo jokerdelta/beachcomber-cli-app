@@ -7,26 +7,26 @@ class Region
 
     def initialize(name)
       @name = name
-      @state_territories = [ ] #empty array to hold state_territory objects "has many" relationship
+      @states = [ ] #empty array to hold state_territory objects "has many" relationship
     end
 
-    def state_territories  #freeze array so that u can't add state_territories directly to it anymore, can only use "add_state_territory"
-        @state_territories.dup.freeze
+    def states #freeze array so that u can't add state_territories directly to it anymore, can only use "add_state_territory"
+        @states.dup.freeze
     end
 
-    def add_state_territory(state_territory)
-        if !state_territory.is_a?(State_territory) #if not State_territory object
-            raise InvalidType, "must be a State_territory object" # custom error message
+    def add_state(state)
+        if !state.is_a?(State) #if not State object
+            raise InvalidType, "must be a State object" # custom error message
         else
-        @state_territories  << state_territory # push object onto array
+        @states  << state # push object onto array
         end
     end
-    
+
     def self.create_from_webpage
        Beachcomber::Scraper.scrape_regions.each do |region_name|
-        name = region_name.to_str
+        name = region_name.text.gsub(":","")#to_str
        region = self.new(name)
-       Beachcomber::CLI.add_region(region)
+      Beachcomber::CLI.add_region(region)
     end
   end
 end

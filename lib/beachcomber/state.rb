@@ -1,4 +1,4 @@
-class State_territory
+class State
 
   attr_accessor :name, :region, :url
 
@@ -20,10 +20,11 @@ class State_territory
   end
 
   def self.create_from_webpage
-     Beachcomber::Scraper.scrape_state_territory.each do |state_name|
+     Beachcomber::Scraper.scrape_states.each do |state_name|
       name = state_name.text
      state = self.new(name)
-     Beachcomber::Region.add_state_territory(state)
+    #  Region.add_state(state)
+      puts state.name
     end
   end
 
