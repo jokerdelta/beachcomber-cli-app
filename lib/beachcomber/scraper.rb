@@ -17,11 +17,12 @@ class Beachcomber::Scraper
       end
   end
 
-  def self.scrape_state(state)
-    doc = Nokogiri::HTML(open("#{BASE_TIDE_URL} "+ "#{state.url}")) # concatenate base index url with state url
-      doc.xpath('//p/a[@href]').each do |link| #xpath for each anchor tag (beach)
-        @@beach_hash[link.text.strip] = link['href'] # assign key = anchor tag text, value = anchor tag href
-      end
+  def self.scrape_state(index) # this is working properly :) :)
+    state = Beachcomber::CLI.states[index] # retrieve state object from CLI states array
+    doc = Nokogiri::HTML(open("#{BASE_TIDE_URL}"+"#{state.url}")) # concatenate base index url with state objects url
+    doc.xpath('//p/a[@href]').each do |link| #xpath for each anchor tag (beach)
+      @@beach_hash[link.text.strip] = link['href'] # assign key = anchor tag text, value = anchor tag href
+    end
   end
 
   def self.states_hash
