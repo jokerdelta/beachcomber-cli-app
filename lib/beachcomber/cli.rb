@@ -9,9 +9,10 @@ class Beachcomber::CLI
   @@states = [ ] # array to hold all the state objects
 
   def  call
-    Beachcomber::Scraper.scrape_states # scrape state names/url from index page and place in hash
+    Beachcomber::Scraper.scrape_index # scrape state names/url from index page and place in hash
     State.create_from_state_hash #create State objects from hashes above
     self.list_states #cycle through state object names and print to screen
+    self.get_state_input
   end
 
   def list_states  # cycle through state object names in @@states array
@@ -22,6 +23,13 @@ class Beachcomber::CLI
       end
   end
 
+def get_state_input
+  puts "Please enter the number of the state/region you would like to beachcomb today:"
+  input = gets.strip
+  index = input.to_i - 1
+  # puts @@states[index].url
+
+end
 
 
 def self.add_state(state) # add state object to @@state array above
