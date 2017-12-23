@@ -21,7 +21,7 @@ class Beachcomber::Scraper
     state = Beachcomber::CLI.states[index] # retrieve state object from CLI states array
     doc = Nokogiri::HTML(open("#{BASE_TIDE_URL}"+"#{state.url}")) # concatenate base index url with state objects url
     doc.xpath('//p/a[@href]').each do |link| #xpath for each anchor tag (beach)
-      @@beach_hash[link.text.strip] = link['href'] # assign key = anchor tag text, value = anchor tag href
+      @@beach_hash[link.text.strip] = link['href'] unless link.text.strip == "About / Warning" # assign key = anchor tag text, value = anchor tag href unless  not beach text
     end
   end
 
