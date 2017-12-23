@@ -5,19 +5,19 @@ require'open-uri'
 
 class Beachcomber::Scraper
 
-  attr_accessor :index_url, :region
+    BASE_TIDE_URL = "http://www.tides.net/"
 
-    @@index_url = "http://www.tides.net/"
-
-
-    def self.scrape_regions
-      doc = Nokogiri::HTML(open(@@index_url))
-      doc.css("p strong")
-    end # end of method
+    @@states_hash = { } # hash to hold state names and url's used to create state objects
 
   def self.scrape_states
-    doc = Nokogiri::HTML(open(@@index_url))
-    doc.css("p a")
-  end # end of method
+    doc = Nokogiri::HTML(open(BASE_TIDE_URL))
+      doc.xpath('//p/a[@href]').each do |link| #xpath for each anchor tag
+        @@states_hash[link.text.strip] = link['href'] # assign key = anchor tag text, value = anchor tag href
+      end
+  end
+
+  def self.states_hash
+    @@states_hash
+  end
 
 end # end of class

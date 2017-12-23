@@ -4,6 +4,7 @@ class State
 
   def initialize(name)
     @name = name
+    @url = url
     @beaches = [ ] #empty array to hold 'beach' objects (has many relationship)
   end
 
@@ -19,13 +20,14 @@ class State
       end
   end
 
-  def self.create_from_webpage
-     Beachcomber::Scraper.scrape_states.each do |state_name|
-      name = state_name.text
-     state = self.new(name)
-    #  Region.add_state(state)
-      puts state.name
-    end
+  def self.create_from_state_hash
+    Beachcomber::Scraper. states_hash.each do |key, value| #cycle through scraper class's state hash
+    state = self.new(key) unless key  == "About / Warning / Contact" # create new state object (except for last anchor tag text on page)
+      if state # put url assignment in if statement to prevent invalid type error if above anchor tag occurs
+        state.url= value
+        Beachcomber::CLI.add_state(state)
+      end
   end
-
 end
+
+end # end of class
