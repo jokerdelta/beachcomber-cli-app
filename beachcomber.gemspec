@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["'Jerry Boyce'"]
   spec.email         = ["'jokerdelta@yahoo.com'"]
 
-  spec.summary       = %q{This gem is designed to assist people who love to beachcomb by scraping the web for tidal predictions.}
+  spec.summary       = %q{Beachcomber is a lightweight CLI application that allows the user to select the state, region, and beach where they want to beachcomb and it displays high and low tide predictions for that location. Happy beachcombing!}
   spec.description   = %q{Beachcomber is a gem designed to help beachcombers perfect their craft by providing the daily high and low tide preditions.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/jokerdelta/beachcomber-cli-app.git"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

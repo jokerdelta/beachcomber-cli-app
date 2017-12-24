@@ -21,7 +21,7 @@ class Beachcomber::CLI
     state = Beachcomber::CLI.states[state_index] # retrieve state object from array
     state.list_beaches # cycle through selected state objects beaches array, print name of each beach object
     state.get_beach_input #get user index and set beach_index
-    Beachcomber::Scraper.scrape_beach(self.state_index, state.beach_index)
+    Beachcomber::Scraper.scrape_beach(self.state_index, state.beach_index) #scrape beach page and print out high/low tide info
   end
 
   def list_states  # cycle through state object names in @@states array
@@ -37,7 +37,6 @@ def get_state_input
   input = gets.strip
   self.state_index = input.to_i - 1 #convert input to integer, subtract 1 to convert to array index
 end
-
 
 def self.add_state(state) # add state object to @@state array above
     if !state.is_a?(State) #if not State object
