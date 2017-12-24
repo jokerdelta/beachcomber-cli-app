@@ -3,12 +3,13 @@ require'pry'
 
 class State
 
-  attr_accessor :name,  :url
+  attr_accessor :name,  :url, :beach_index
 
   def initialize(name)
     @name = name
     @url = url
     @beaches = [ ] #empty array to hold 'beach' objects (has many relationship)
+    @beach_index = nil
   end
 
   def beaches #freeze array so that u can't add beaches directly to it anymore, can only use "add_beach method"
@@ -34,13 +35,22 @@ class State
 end
 
 def list_beaches  # cycle through beach object in beaches  array
+  puts "Tide predictions for the following beaches in #{self.name} are available:"
   @beaches.each_with_index do |beach, index|
     number = index + 1
     name = beach.name
     puts "#{number}.  #{name}" # print the name of each beach object in array
   end
-  puts "Tide predictions for the following beaches in #{self.name} are available."
-  puts "Please enter the number of the beach you would like tide predictions for:"
+end
+
+def get_beach_input
+  puts "Please enter the number of the beach where you would like to go beachcombing:"
+  input = gets.strip
+  self.beach_index = input.to_i - 1 #convert input to integer, subtract 1 to convert to beach array index
+end
+
+def beach_index
+  @beach_index
 end
 
 end # end of class

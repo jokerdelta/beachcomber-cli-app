@@ -20,6 +20,8 @@ class Beachcomber::CLI
     Beach.create_from_beach_hash(self.state_index) #create Beach objects from hash within state object
     state = Beachcomber::CLI.states[state_index] # retrieve state object from array
     state.list_beaches # cycle through selected state objects beaches array, print name of each beach object
+    state.get_beach_input #get user index and set beach_index
+    Beachcomber::Scraper.scrape_beach(self.state_index, state.beach_index)
   end
 
   def list_states  # cycle through state object names in @@states array
