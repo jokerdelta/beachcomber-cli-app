@@ -32,7 +32,11 @@ class Beachcomber::Scraper
       doc.css('.wrap_textual_details').each do |a|
         puts a.text
       end
-  end
+      rescue
+        puts "Oh no!  An error occured when Beachcomber attempted to retrieve the tidal predictions for #{state.name}. "
+        puts "Please try again at a later time, or visit www.tides.net for an explanation."
+        self.scrape_state(state_index)
+      end
 
   def self.states_hash
     @@states_hash
